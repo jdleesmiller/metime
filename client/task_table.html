@@ -1,0 +1,108 @@
+<template name="task_table">
+  <table id="task-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Text</th>
+        <th>Length</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="task-table-new-row">
+        <td>
+          <span class="glyphicon glyphicon-asterisk"></span>
+        </td>
+        <td>
+          &mdash;
+        </td>
+        <td>
+          &mdash;
+        </td>
+        <td width="50%">
+          <input type="text" class="form-control" id="new-task" placeholder="task" />
+        </td>
+        <td>
+          &mdash;
+        </td>
+      </tr>
+      {{#each tasks}}
+        {{> task_table_row}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="task_table_row">
+  <tr class="task-table-row">
+    <td>
+      <a href="#" class="task-table-remove glyphicon glyphicon-remove"></a>
+    </td>
+    <td>
+      {{#if editing 'start_at'}}
+        {{> task_table_start_at_input}}
+      {{else}}
+        <a href="#" class="task-table-start-at">{{formatted_start_at}}</a>
+      {{/if}}
+    </td>
+    <td>
+      {{#if editing 'end_at'}}
+        {{> task_table_end_at_input}}
+      {{else}}
+        <a href="#" class="task-table-end-at">{{formatted_end_at}}</a>
+      {{/if}}
+    </td>
+    <td>
+      {{#if editing 'text'}}
+        <input type="text" class="form-control task-table-text-input" value="{{text}}" />
+      {{else}}
+        <a href="#" class="task-table-text">{{text}}</a>
+      {{/if}}
+    </td>
+    <td>
+      {{duration}}
+    </td>
+  </tr>
+</template>
+
+<template name="task_table_start_at_input">
+  <input type="text" class="task-table-start-at-input form-control" value="{{datetimepicker_start_at}}">
+</template>
+
+<template name="task_table_end_at_input">
+  <input type="text" class="task-table-end-at-input form-control" value="{{datetimepicker_end_at}}">
+</template>
+
+<template name="task_list_item">
+  <li class="task-list-item">
+    {{#if editing}}
+      <div class="edit">
+        <input id="task-input" type="text" value="{{text}}" />
+      </div>
+    {{else}}
+      <div class="destroy"></div>
+      <div class="display">
+        <div class="task-text">{{text}}</div>
+      </div>
+    {{/if}}
+    <div class="task-list-item-tags">
+      {{#each tag_objects}}
+        <div class="tag removable-tag">
+          <div class="name">{{tag}}</div>
+          <div class="remove"></div>
+        </div>
+      {{/each}}
+      {{#if adding_tag}}
+        <div class="tag edittag">
+          <input type="text" id="edittag-input" value="" />
+        </div>
+      {{else}}
+        <div class="tag addtag">
+          +tag
+        </div>
+      {{/if}}
+    </div>
+  </li>
+</template>
+

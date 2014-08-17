@@ -1,0 +1,37 @@
+@require 'lib/variables.import'
+
+#metime-clock-container
+  position absolute
+  top 0
+  right sidebarWidth px
+  bottom 0
+  left sidebarWidth px
+
+#metime-clock
+  position absolute
+
+  svg
+    .clock-face
+      fill clockBackground
+      stroke clockForeground
+      stroke-width 2
+
+    .clock-hour-tick
+      stroke clockForeground
+      stroke-width 1
+
+    .clock-hour-label
+      fill clockForeground
+
+    .clock-hour-hand, .clock-minute-hand, .clock-second-hand
+      stroke clockForeground
+
+    .clock-hour-hand
+      stroke-width 8
+
+    .clock-minute-hand
+      stroke-width 4
+
+    .clock-second-hand
+      stroke-width 2
+

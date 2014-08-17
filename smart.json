@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "bootstrap-3": {},
+    "iron-router": {},
+    "bower": {},
+    "moment": {},
+    "bootstrap3-datetimepicker": {}
+  },
+  "bower": {
+  }
+}
