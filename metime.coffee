@@ -10,3 +10,14 @@ Router.map ->
     path: '/tasks'
     template: 'task_table'
 
+  this.route 'entry_table',
+    path: '/entries'
+    template: 'entry_table'
+
+# used to upgrade data from Tasks to Entries
+#Meteor.methods
+#  upgrade: ->
+#    Tasks.find({}).forEach (task) ->
+#      Entries.insert
+#        stamp: task.end_at
+#        text: task.text

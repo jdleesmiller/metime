@@ -1,0 +1,73 @@
+<template name="entry_table">
+  <table id="entry-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>When</th>
+        <th>What</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="entry-table-new-row">
+        <td>
+          <span class="glyphicon glyphicon-asterisk"></span>
+        </td>
+        <td>
+          &mdash;
+        </td>
+        <td>
+          <div class="input-group">
+            <input type="text" class="form-control" id="entry-table-new-text" placeholder="entry" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" id="entry-table-new-restart-clock">Restart Clock</button>
+            </span>
+          </div>
+        </td>
+        <td>
+          &mdash;
+        </td>
+      </tr>
+      {{#each entries}}
+        {{> entry_table_row}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="entry_table_row">
+  <tr class="entry-table-row">
+    <td>
+      <a href="#" class="entry-table-remove glyphicon glyphicon-remove"></a>
+    </td>
+    <td>
+      {{#if editing 'stamp'}}
+        {{> entry_table_stamp_input}}
+      {{else}}
+        {{> entry_table_stamp_link}}
+      {{/if}}
+    </td>
+    <td>
+      {{#if editing 'text'}}
+        <input type="text" class="form-control entry-table-text-input" value="{{text}}" />
+      {{else}}
+        {{#if clock_stopped}}
+          <a href="#" class="entry-table-text entry-table-clock-stopped">(clock stopped)</a>
+        {{else}}
+          <a href="#" class="entry-table-text">{{text}}</a>
+        {{/if}}
+      {{/if}}
+    </td>
+    <td>
+      <span class="entry-table-duration"></span>
+    </td>
+  </tr>
+</template>
+
+<template name="entry_table_stamp_link">
+  <a href="#" class="entry-table-stamp" data-stamp="{{stamp}}">{{formatted_stamp}}</a>
+</template>
+
+<template name="entry_table_stamp_input">
+  <input type="text" class="entry-table-stamp form-control" data-stamp="{{stamp}}" value="{{formatted_stamp}}">
+</template>

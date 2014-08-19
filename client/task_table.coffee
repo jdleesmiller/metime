@@ -18,7 +18,7 @@ FORMAT = 'YYYY-MM-DD HH:mm:ss'
 #
 # table
 #
-Template.task_table.events(Metime.okCancelEvents('#new-task',
+Template.task_table.events(Metime.okCancelEvents('#new-task', false,
   ok: (text, evt) ->
     tag = null # TODO Session.get('tag_filter')
 
@@ -71,7 +71,8 @@ Template.task_table_row.events
     Deps.flush()
     Metime.activateInput template.find('.task-table-text-input')
 
-Template.task_table_row.events(Metime.okCancelEvents('.task-table-text-input',
+Template.task_table_row.events(Metime.okCancelEvents(
+  '.task-table-text-input', false,
   ok: (value) ->
     Tasks.update @_id, $set: {text: value}
     setEditing null, null
@@ -97,7 +98,8 @@ Template.task_table_start_at_input.helpers
   datetimepicker_start_at: ->
     moment(@start_at).format(FORMAT)
 
-Template.task_table_start_at_input.events(Metime.okCancelEvents('input',
+Template.task_table_start_at_input.events(Metime.okCancelEvents(
+  'input', false,
   ok: (value, event, template) ->
     Tasks.update @_id, $set: {start_at: moment(value).valueOf()}
     stopEditingDate(template)
@@ -112,7 +114,8 @@ Template.task_table_end_at_input.helpers
   datetimepicker_end_at: ->
     moment(@end_at).format(FORMAT)
 
-Template.task_table_end_at_input.events(Metime.okCancelEvents('input',
+Template.task_table_end_at_input.events(Metime.okCancelEvents(
+  'input', false,
   ok: (value, event, template) ->
     Tasks.update @_id, $set: {end_at: moment(value).valueOf()}
     stopEditingDate(template)

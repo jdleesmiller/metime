@@ -9,7 +9,7 @@ window.Metime = {};
 // Returns an event map that handles the "escape" and "return" keys and
 // "blur" events on a text input (given by selector) and interprets them
 // as "ok" or "cancel".
-Metime.okCancelEvents = function (selector, callbacks) {
+Metime.okCancelEvents = function (selector, allowBlank, callbacks) {
   var ok = callbacks.ok || function () {};
   var cancel = callbacks.cancel || function () {};
 
@@ -24,7 +24,7 @@ Metime.okCancelEvents = function (selector, callbacks) {
                  evt.type === "focusout") {
         // blur/return/enter = ok/submit if non-empty
         var value = String(evt.target.value || "");
-        if (value)
+        if (value || allowBlank)
           ok.call(this, value, evt, template);
         else
           cancel.call(this, evt, template);

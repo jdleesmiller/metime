@@ -1,5 +1,7 @@
 @Tasks = new Meteor.Collection('tasks')
 
+@Entries = new Meteor.Collection('entries')
+
 #
 # Center the given element with respect to its parent and maintain its square
 # aspect ratio.
@@ -14,4 +16,3 @@ Metime.centerSquareInParent = (element) ->
     element.width(parent.height())
     element.height(parent.height())
     element.css(top: 0, left: (parent.width() - element.width()) / 2)
-
