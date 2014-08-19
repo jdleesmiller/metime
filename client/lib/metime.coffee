@@ -1,5 +1,3 @@
-@Tasks = new Meteor.Collection('tasks')
-
 @Entries = new Meteor.Collection('entries')
 
 #
