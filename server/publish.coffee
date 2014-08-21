@@ -2,6 +2,10 @@
 #             stamp: Number}
 @Entries = new Meteor.Collection('entries')
 
+# Tags -- {name: String,
+#          color: String)
+@Tags = new Meteor.Collection('tags')
+
 #
 # create one new entry on initial install so we always have one to anchor on
 #

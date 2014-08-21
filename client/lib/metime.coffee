@@ -1,5 +1,7 @@
 @Entries = new Meteor.Collection('entries')
 
+@Tags = new Meteor.Collection('tags')
+
 #
 # Center the given element with respect to its parent and maintain its square
 # aspect ratio.

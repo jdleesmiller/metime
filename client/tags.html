@@ -1,0 +1,51 @@
+<template name="tag_table">
+  <table id="tag-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Tag</th>
+        <th>Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="tag-table-new-row">
+        <td>
+          <span class="glyphicon glyphicon-asterisk"></span>
+        </td>
+        <td>
+          <input type="text" class="form-control" id="tag-table-new-name" placeholder="tag" />
+        </td>
+        <td>
+          &mdash;
+        </td>
+      </tr>
+      {{#each tags}}
+        {{> tag_table_row}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="tag_table_row">
+  <tr class="tag-table-row">
+    <td>
+      <a href="#" class="tag-table-remove glyphicon glyphicon-remove"></a>
+    </td>
+    <td>
+      {{#if editing 'name'}}
+        <input type="text" class="form-control tag-table-name-input" value="{{name}}" />
+      {{else}}
+        <a href="#" class="tag-table-name">{{name}}</a>
+      {{/if}}
+    </td>
+    <td>
+      {{#if editing 'color'}}
+        <input type="text" class="form-control tag-table-color-input" value="{{color}}" />
+      {{else}}
+        <a href="#" class="tag-table-color">{{color}}</a>
+      {{/if}}
+    </td>
+  </tr>
+</template>
+
+

@@ -10,3 +10,7 @@ Router.map ->
     path: '/entries'
     template: 'entry_table'
 
+  this.route 'tag_table',
+    path: '/tags'
+    template: 'tag_table'
+
