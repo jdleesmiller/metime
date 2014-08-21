@@ -131,3 +131,16 @@ Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
     stopEditingDate(template)
 ))
 
+#
+# text with tags
+#
+Template.tagged_text.helpers
+  words: (text) ->
+    textWords = _.flatten(Metime.scan(@text, /(\S+)/g))
+    _.map(textWords, (word) ->
+      if tag = Tags.findOne(name: word)
+        {color: tag.color, word: word}
+      else
+        {word: word}
+    )
+

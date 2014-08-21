@@ -11,6 +11,21 @@ setEditing = (id, field) ->
   Session.set 'editing_tag', value
 
 #
+# tag colors
+#
+# this is Cynthia Brewer's colorbrewer Set3 from
+# https://github.com/mbostock/d3/blob/master/lib/colorbrewer/colorbrewer.js
+#
+TAG_COLORS = ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462",
+              "#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
+
+pickColor = () ->
+  used = _.map(Tags.find({}), -> @color)
+  unused = _.difference(TAG_COLORS, used)
+  unused = TAG_COLORS if unused.length == 0
+  _.sample(unused)
+
+#
 # table
 #
 Template.tag_table.events(Metime.okCancelEvents(
@@ -18,7 +33,7 @@ Template.tag_table.events(Metime.okCancelEvents(
   ok: (value, evt) ->
     Tags.insert
       name: value
-      color: 'green'
+      color: pickColor()
     evt.target.value = ''
 ))
 

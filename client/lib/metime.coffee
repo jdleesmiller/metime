@@ -16,3 +16,15 @@ Metime.centerSquareInParent = (element) ->
     element.width(parent.height())
     element.height(parent.height())
     element.css(top: 0, left: (parent.width() - element.width()) / 2)
+
+#
+# Scan a string like ruby's String#scan.
+#
+# Based on http://stackoverflow.com/questions/13895373
+#
+Metime.scan = (string, regex) ->
+  throw new Error("regex must have 'global' flag set") unless regex.global
+  r = []
+  string.replace regex, ->
+    r.push Array.prototype.slice.call(arguments, 1, -2)
+  r

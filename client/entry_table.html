@@ -54,7 +54,7 @@
         {{#if clock_stopped}}
           <a href="#" class="entry-table-text entry-table-clock-stopped">(clock stopped)</a>
         {{else}}
-          <a href="#" class="entry-table-text">{{text}}</a>
+          <a href="#" class="entry-table-text">{{> tagged_text}}</a>
         {{/if}}
       {{/if}}
     </td>
@@ -62,6 +62,16 @@
       <span class="entry-table-duration"></span>
     </td>
   </tr>
+</template>
+
+<template name="tagged_text">
+{{#each words}}
+  {{#if color}}
+    <span class="entry-text-tag" style="background-color: {{color}};">{{word}}</span>
+  {{else}}
+    {{word}}
+  {{/if}}
+{{/each}}
 </template>
 
 <template name="entry_table_stamp_link">
