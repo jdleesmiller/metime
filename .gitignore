@@ -1,2 +1,3 @@
 packages
 .meteor
+private/backup/*.csv
