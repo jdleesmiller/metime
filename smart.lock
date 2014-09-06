@@ -2,57 +2,16 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "bootstrap-3": {},
-      "iron-router": {},
-      "bower": {},
-      "moment": {},
-      "bootstrap3-datetimepicker": {}
+      "bootstrap3-datetimepicker": {
+        "git": "https://github.com/tsega/meteor-bootstrap3-datetimepicker",
+        "branch": "master"
+      }
     },
     "packages": {
-      "bootstrap-3": {
-        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.2.0-1",
-        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
-      },
-      "iron-router": {
-        "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.8.2",
-        "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
-      },
-      "bower": {
-        "git": "https://github.com/mquandalle/meteor-bower.git",
-        "tag": "v0.1.10",
-        "commit": "ba0081a9f2919918f48f6b2f9e2f33729c79aecc"
-      },
-      "moment": {
-        "git": "https://github.com/acreeger/meteor-moment.git",
-        "tag": "v2.8.1",
-        "commit": "722ea63783d594341023836b7d418ab2567dab8c"
-      },
       "bootstrap3-datetimepicker": {
-        "git": "https://github.com/tsega/meteor-bootstrap3-datetimepicker.git",
-        "tag": "v0.3.0",
-        "commit": "a0b5e8aaa117555672bb5a479b3842bb97e3f3b5"
-      },
-      "iron-layout": {
-        "git": "https://github.com/EventedMind/iron-layout.git",
-        "tag": "v0.2.0",
-        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
-      },
-      "blaze-layout": {
-        "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.5",
-        "commit": "273e3ab7d005d91a1a59c71bd224533b4dae2fbd"
-      },
-      "iron-core": {
-        "git": "https://github.com/EventedMind/iron-core.git",
-        "tag": "v0.2.0",
-        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
-      },
-      "iron-dynamic-template": {
-        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
-        "tag": "v0.2.1",
-        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
+        "git": "https://github.com/tsega/meteor-bootstrap3-datetimepicker",
+        "branch": "master",
+        "commit": "79d21b254637f1997740a9984fae25d3bf8b66cb"
       }
     }
   }

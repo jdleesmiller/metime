@@ -1,11 +1,9 @@
 {
   "packages": {
-    "bootstrap-3": {},
-    "iron-router": {},
-    "bower": {},
-    "moment": {},
-    "bootstrap3-datetimepicker": {}
+    "bootstrap3-datetimepicker": {
+      "git": "https://github.com/tsega/meteor-bootstrap3-datetimepicker",
+      "branch": "master"
+    }
   },
-  "bower": {
-  }
+  "bower": {}
 }
