@@ -1,10 +1,8 @@
-# Entries -- {text: String,
-#             stamp: Number}
-@Entries = new Meteor.Collection('entries')
+Meteor.publish 'tags', ->
+  Tags.find {}
 
-# Tags -- {name: String,
-#          color: String)
-@Tags = new Meteor.Collection('tags')
+Meteor.publish 'entries', ->
+  Entries.find {}, sort: {stamp: -1}, limit: 200
 
 #
 # create one new entry on initial install so we always have one to anchor on
@@ -15,3 +13,4 @@ Meteor.startup ->
     Entries.insert
       text: FIRST_ENTRY_TEXT
       stamp: new Date().getTime()
+

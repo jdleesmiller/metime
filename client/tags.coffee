@@ -1,3 +1,5 @@
+Meteor.subscribe 'tags'
+
 #
 # use the session to store which row and field we're editing
 #

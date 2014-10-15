@@ -35,9 +35,11 @@ refreshDurations = ->
       duration = ""
     row1.find('.entry-table-duration').text(duration)
 
-Deps.autorun ->
-  Entries.find({}, sort: {stamp: -1}).fetch()
-  setTimeout refreshDurations, 100 unless Deps.currentComputation.firstRun
+refreshDurationsAfterDelay = ->
+  setTimeout refreshDurations, 300 # ms
+
+Meteor.subscribe 'entries', ->
+  refreshDurationsAfterDelay()
 
 #
 # date format --- assumed to be in the user's local timezone
@@ -54,6 +56,7 @@ Template.entry_table.events(Metime.okCancelEvents(
       text: text
       stamp: new Date().getTime()
     evt.target.value = ''
+    refreshDurationsAfterDelay()
 ))
 
 Template.entry_table.events
@@ -61,6 +64,7 @@ Template.entry_table.events
     Entries.insert
       text: ''
       stamp: new Date().getTime()
+    refreshDurationsAfterDelay()
 
 Template.entry_table.helpers
   entries: -> Entries.find({}, sort: {stamp: -1})

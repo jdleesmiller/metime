@@ -7,7 +7,6 @@ standard-app-packages
 insecure
 d3
 coffeescript
-autopublish
 less
 stylus
 mquandalle:bower@0.1.10
@@ -15,4 +14,3 @@ mrt:moment@2.8.1
 bootstrap3-datetimepicker
 iron:router
 mizzao:bootstrap-3
-
