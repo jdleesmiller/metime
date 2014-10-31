@@ -125,6 +125,7 @@ stopEditingDate = (template, stamp) ->
   input = $(template.find('input'))
   input.data("DateTimePicker")?.hide()
   setEditing null, null
+  refreshDurationsAfterDelay()
 
 Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
   ok: (value, event, template) ->
@@ -147,4 +148,3 @@ Template.tagged_text.helpers
       else
         {word: word}
     )
-
