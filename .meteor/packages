@@ -5,12 +5,12 @@
 
 standard-app-packages
 insecure
-d3
 coffeescript
 less
 stylus
 mquandalle:bower@0.1.10
 mrt:moment@2.8.1
-bootstrap3-datetimepicker
 iron:router
 mizzao:bootstrap-3
+tsega:bootstrap3-datetimepicker
+
