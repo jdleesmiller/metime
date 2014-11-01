@@ -22,3 +22,6 @@ Router.map ->
     path: '/tags'
     template: 'tag_table'
 
+  this.route 'tag_chart',
+    path: '/charts'
+    template: 'tag_chart'
