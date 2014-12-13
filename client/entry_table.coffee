@@ -140,10 +140,12 @@ Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
 # text with tags
 #
 Template.tagged_text.helpers
-  words: (text) ->
+  words: () ->
+    hitDash = false
     textWords = _.flatten(Metime.scan(@text, /(\S+)/g))
     _.map(textWords, (word) ->
-      if tag = Tags.findOne(name: word)
+      hitDash = true if word == '-'
+      if !hitDash && tag = Tags.findOne(name: word)
         {color: tag.color, word: word}
       else
         {word: word}
