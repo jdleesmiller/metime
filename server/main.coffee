@@ -1,9 +1,3 @@
-Meteor.publish 'tags', ->
-  Tags.find {}
-
-Meteor.publish 'entries', ->
-  Entries.find {}, sort: {stamp: -1}, limit: 200
-
 #
 # create one new entry on initial install so we always have one to anchor on
 #
@@ -13,4 +7,3 @@ Meteor.startup ->
     Entries.insert
       text: FIRST_ENTRY_TEXT
       stamp: new Date().getTime()
-
