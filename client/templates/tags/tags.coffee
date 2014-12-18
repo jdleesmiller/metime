@@ -1,5 +1,3 @@
-Meteor.subscribe 'tags'
-
 #
 # use the session to store which row and field we're editing
 #
@@ -79,4 +77,3 @@ Template.tag_table_row.events(Metime.okCancelEvents(
     Tags.update @_id, $set: {color: value}
     setEditing null, null
 ))
-

@@ -1,5 +1,6 @@
 Router.configure
   layoutTemplate: 'layout'
+  waitOn: -> Meteor.subscribe 'tags'
 
 Router.map ->
   this.route 'clock',
@@ -9,6 +10,7 @@ Router.map ->
   this.route 'entry_table',
     path: '/entries'
     template: 'entry_table'
+    waitOn: -> Meteor.subscribe 'entries'
 
   this.route 'tag_table',
     path: '/tags'

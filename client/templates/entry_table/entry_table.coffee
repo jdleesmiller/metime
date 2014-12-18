@@ -10,8 +10,6 @@ setEditing = (id, field) ->
     value = null
   Session.set 'editing_entry', value
 
-Meteor.subscribe 'entries'
-
 #
 # date format --- assumed to be in the user's local timezone
 #
