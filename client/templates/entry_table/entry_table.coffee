@@ -10,36 +10,7 @@ setEditing = (id, field) ->
     value = null
   Session.set 'editing_entry', value
 
-#
-# hack to update the duration column dynamically
-#
-# the duration column depends on two adjacent values in the entry stream, which
-# seems to be difficult to do reactively -- changing a timestamp could affect
-# multiple entries, and it could reorder the list; so, here we just refresh the
-# whole list of durations whenever the data change (or we rerender the whole
-# table)
-#
-refreshDurations = ->
-  rowStamp = (row) -> row.find('.entry-table-stamp').data('stamp')
-  $('.entry-table-row').each (index, row) ->
-    row1 = $(row)
-    row0 = row1.next()
-    if row1 && row0
-      stamp1 = rowStamp(row1)
-      stamp0 = rowStamp(row0)
-      if stamp1 && stamp0
-        duration = moment(stamp1).from(moment(stamp0), true)
-      else
-        duration = ""
-    else
-      duration = ""
-    row1.find('.entry-table-duration').text(duration)
-
-refreshDurationsAfterDelay = ->
-  setTimeout refreshDurations, 300 # ms
-
-Meteor.subscribe 'entries', ->
-  refreshDurationsAfterDelay()
+Meteor.subscribe 'entries'
 
 #
 # date format --- assumed to be in the user's local timezone
@@ -56,7 +27,6 @@ Template.entry_table.events(Metime.okCancelEvents(
       text: text
       stamp: new Date().getTime()
     evt.target.value = ''
-    refreshDurationsAfterDelay()
 ))
 
 Template.entry_table.events
@@ -64,18 +34,19 @@ Template.entry_table.events
     Entries.insert
       text: ''
       stamp: new Date().getTime()
-    refreshDurationsAfterDelay()
 
 Template.entry_table.helpers
   entries: -> Entries.find({}, sort: {stamp: -1})
-
-Template.entry_table.rendered = ->
-  refreshDurations()
 
 #
 # table row
 #
 Template.entry_table_row.helpers
+  duration: ->
+    previousEvent = Entries.findOne(
+      { stamp: { $lt: this.stamp} }, sort: {stamp: -1})
+    if previousEvent
+      moment(this.stamp).from(moment(previousEvent.stamp), true)
   editing: (field) ->
     value = Session.get('editing_entry')
     value && value.id == @_id && value.field == field
@@ -105,7 +76,6 @@ Template.entry_table_row.events(Metime.okCancelEvents(
     setEditing null, null
 ))
 
-
 #
 # date stamp link and input
 #
@@ -125,7 +95,6 @@ stopEditingDate = (template, stamp) ->
   input = $(template.find('input'))
   input.data("DateTimePicker")?.hide()
   setEditing null, null
-  refreshDurationsAfterDelay()
 
 Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
   ok: (value, event, template) ->
