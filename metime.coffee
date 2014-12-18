@@ -1,5 +1,5 @@
 Router.configure
-  layoutTemplate: 'main_layout'
+  layoutTemplate: 'layout'
 
 Router.map ->
   this.route 'clock',
