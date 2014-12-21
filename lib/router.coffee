@@ -16,6 +16,12 @@ Router.map ->
     path: '/tags'
     template: 'tag_table'
 
-  this.route 'tag_chart',
-    path: '/charts'
-    template: 'tag_chart'
+Router.route '/graph/last/:amount/:period',
+  name: 'graphPeriod'
+  waitOn: ->
+    Meteor.subscribe 'entriesForPeriod',
+      parseInt(@params.amount), @params.period
+  data: ->
+    entries: Entries.find { }, { sort: { stamp: -1 } }
+    amount: parseInt(@params.amount)
+    period: @params.period
