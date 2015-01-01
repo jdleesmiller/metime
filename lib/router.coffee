@@ -25,3 +25,13 @@ Router.route '/graph/last/:amount/:period',
     entries: Entries.find { }, { sort: { stamp: -1 } }
     amount: parseInt(@params.amount)
     period: @params.period
+
+Router.route '/summary/last/:amount/:period',
+  name: 'summaryTable'
+  waitOn: ->
+    Meteor.subscribe 'entriesForPeriod',
+      parseInt(@params.amount), @params.period
+  data: ->
+    entries: Entries.find { }, { sort: { stamp: -1 } }
+    amount: parseInt(@params.amount)
+    period: @params.period

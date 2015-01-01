@@ -1,8 +1,9 @@
 /**
  * Taken from the meteor todos example app (0.8.3).
  */
-
-window.Metime = {};
+if (!window.Metime) {
+  window.Metime = {};
+}
 
 ////////// Helpers for in-place editing //////////
 

@@ -107,4 +107,4 @@ Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
 # text with tags
 #
 Template.tagged_text.helpers
-  words: -> Mt.tagString(@text)
+  words: -> Metime.tagString(@text)
