@@ -1,34 +1,39 @@
 <template name="summaryTable">
-  <table>
+  <table id="summary-table" class="table">
     <thead>
       <tr>
         <th></th>
-        <th colspan="2">date1</th>
-        <th colspan="2">date2</th>
+        {{#each buckets}}
+          <th colspan="2">{{name}}</th>
+        {{/each}}
       </tr>
     </thead>
     <tbody>
+      {{#each tags}}
+        {{>summaryTableTagRow}}
+      {{/each}}
+    </tbody>
+    <tfoot>
       <tr>
         <th>on the clock</th>
-        <td>123</td>
-        <td>33%</td>
-        <td>123</td>
-        <td>33%</td>
+        {{#each onTheClock.buckets}}
+          {{> summaryTableTagBucket}}
+        {{/each}}
       </tr>
-      <tr>
-        <th>biz</th>
-        <td>123</td>
-        <td>33%</td>
-        <td>123</td>
-        <td>33%</td>
-      </tr>
-      <tr>
-        <th>dev</th>
-        <td>123</td>
-        <td>33%</td>
-        <td>123</td>
-        <td>33%</td>
-      </tr>
-    </tbody>
+    </tfoot>
   </table>
+</template>
+
+<template name="summaryTableTagRow">
+  <tr class="summary-table-tag-row">
+    <th class="summary-table-tag"><span style="background-color: {{color}};">{{name}}</span></th>
+    {{#each buckets}}
+      {{> summaryTableTagBucket}}
+    {{/each}}
+  </tr>
+</template>
+
+<template name="summaryTableTagBucket">
+  <td class="summary-table-data">{{hours}}</td>
+  <td class="summary-table-data">{{percentOnTheClock}}%</td>
 </template>
