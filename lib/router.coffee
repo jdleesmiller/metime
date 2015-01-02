@@ -52,17 +52,24 @@ Router.route '/summary/last/:amount/:period',
       else
         name: moment(breaks[i]).format('MM YYYY')
 
-    onTheClock:
+    other:
+      color: '#000'
       buckets: _(bucketIndexes).map (bucketIndex) ->
-        otcDays = bucketOnTheClock(bucketIndex)
-        hours: (otcDays * 24).toFixed(1)
-        percentOnTheClock: (100 * otcDays / bucketDays(bucketIndex)).
-          toFixed(1)
+        daysOnTheClock = bucketOnTheClock(bucketIndex)
+        hours: use.other[bucketIndex] * 24
+        percentOnTheClock: 100 * use.other[bucketIndex] / daysOnTheClock
+
+    onTheClock:
+      color: '#000'
+      buckets: _(bucketIndexes).map (bucketIndex) ->
+        daysOnTheClock = bucketOnTheClock(bucketIndex)
+        hours: daysOnTheClock * 24
+        percentOnTheClock: 100 * daysOnTheClock / bucketDays(bucketIndex)
 
     tags: _(use.tags).map (tagBuckets, tagName) ->
       name: tagName
       color: _(tags).find((tag) -> tag.name == tagName).color
       buckets: _(tagBuckets).map (tagDays, bucketIndex) ->
         daysOnTheClock = bucketOnTheClock(bucketIndex)
-        hours: (tagDays * 24).toFixed(1)
-        percentOnTheClock: (100 * tagDays / daysOnTheClock).toFixed(1)
+        hours: tagDays * 24
+        percentOnTheClock: 100 * tagDays / daysOnTheClock

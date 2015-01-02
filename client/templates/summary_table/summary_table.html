@@ -4,7 +4,7 @@
       <tr>
         <th></th>
         {{#each buckets}}
-          <th colspan="2">{{name}}</th>
+          <th colspan="3">{{name}}</th>
         {{/each}}
       </tr>
     </thead>
@@ -12,13 +12,23 @@
       {{#each tags}}
         {{>summaryTableTagRow}}
       {{/each}}
+      <tr>
+        {{#with other}}
+          <th>other</th>
+          {{#each buckets}}
+            {{> summaryTableTagBucket}}
+          {{/each}}
+        {{/with}}
+      </tr>
     </tbody>
     <tfoot>
       <tr>
-        <th>on the clock</th>
-        {{#each onTheClock.buckets}}
-          {{> summaryTableTagBucket}}
-        {{/each}}
+        {{#with onTheClock}}
+          <th>on&nbsp;the&nbsp;clock</th>
+          {{#each buckets}}
+            {{> summaryTableTagBucket}}
+          {{/each}}
+        {{/with}}
       </tr>
     </tfoot>
   </table>
@@ -34,6 +44,11 @@
 </template>
 
 <template name="summaryTableTagBucket">
-  <td class="summary-table-data">{{hours}}</td>
-  <td class="summary-table-data">{{percentOnTheClock}}%</td>
+  <td class="summary-table-data">{{hoursFormatted}}h</td>
+  <td class="summary-table-data">{{percentOnTheClockFormatted}}%</td>
+  <td>
+    <div class="summary-table-bar" style="width: {{percentOnTheClockMaxWidth}}px;">
+      <div style="background-color: {{../color}}; width: {{percentOnTheClockWidth}}px;">&nbsp;</div>
+    </div>
+  </td>
 </template>
