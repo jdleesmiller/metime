@@ -25,7 +25,8 @@ matchTags = (text, tagRegExp) ->
   text.split(/\s-\s/)[0].match(tagRegExp) || []
 
 #
-# `entries`: zero or more Entries in descending order by `stamp`
+# `entries`: zero or more Entries in descending order by `stamp`; may be
+# modified in place
 #
 # `breaks`: two or more time indices, in milliseconds since the epoch, in
 # strictly ascending order
@@ -38,17 +39,26 @@ breakEntries = (entries, breaks, callback) ->
   maxBreak = breaks[breaks.length - 1]
   bucketIndex = [0...breaks.length - 1]
 
+  if entries.length == 0 || maxBreak > entries[0].stamp
+    entries.unshift text: '', stamp: maxBreak
+
+  if entries[entries.length - 1].stamp > minBreak
+    entries.push text: '', stamp: minBreak
+
   for entry, i in entries
+    return if i + 1 >= entries.length
+
     time1 = entry.stamp
     continue if time1 <= minBreak
 
-    time0 = if i + 1 < entries.length then entries[i + 1].stamp else minBreak
+    time0 = entries[i + 1].stamp
     return if time0 >= maxBreak
 
     dt = (intersectionLength time0, time1, breaks[j], breaks[j + 1] \
       for j in bucketIndex)
 
-    callback(entry, dt)
+    callback entry, dt
+
   return
 
 getBreaks = (amount, period) ->
@@ -72,8 +82,6 @@ sumEntryTime = (tags, breaks) ->
 
   entries = Entries.find({ }, { sort: { stamp: -1 } }).fetch()
   breakEntries entries, breaks, (entry, entryUse) ->
-    #console.log entry.text
-    #console.log entryUse
     if entry.text.length == 0
       sumBucket use.clockStopped, entryUse
     else
