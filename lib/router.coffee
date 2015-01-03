@@ -36,7 +36,6 @@ Router.route '/summary/last/:amount/:period',
     tags = Tags.find().fetch()
     breaks = Metime.getBreaks @params.amount, @params.period
     use = Metime.sumEntryTime tags, breaks
-    console.log use
 
     bucketDays = (bucketIndex) ->
       (breaks[bucketIndex + 1] - breaks[bucketIndex]) / 1000 / 3600 / 24
@@ -47,10 +46,10 @@ Router.route '/summary/last/:amount/:period',
     bucketIndexes = [0...breaks.length - 1]
 
     buckets: _(bucketIndexes).map (i) =>
-      if @params.period =~ /week/
+      if /week/.test(@params.period)
         name: moment(breaks[i]).format('L')
       else
-        name: moment(breaks[i]).format('MM YYYY')
+        name: moment(breaks[i]).format('MMM YYYY')
 
     other:
       color: '#000'
