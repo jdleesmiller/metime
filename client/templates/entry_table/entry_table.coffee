@@ -83,15 +83,16 @@ Template.entry_table_stamp_link.helpers
 Template.entry_table_stamp_input.rendered = ->
   $(@find('input')).datetimepicker
     format: FORMAT
-    useSeconds: true
     sideBySide: true
+    widgetPositioning:
+      horizontal: 'left'
 
 Template.entry_table_stamp_input.helpers
   formatted_stamp: -> moment(@stamp).format(FORMAT)
 
 stopEditingDate = (template, stamp) ->
   input = $(template.find('input'))
-  input.data("DateTimePicker")?.hide()
+  input.data('DateTimePicker')?.hide()
   setEditing null, null
 
 Template.entry_table_stamp_input.events(Metime.okCancelEvents('input', false,
