@@ -86,6 +86,11 @@ Template.entry_table_stamp_input.rendered = ->
     sideBySide: true
     widgetPositioning:
       horizontal: 'left'
+    keyBinds:
+      up: null
+      down: null
+      left: null
+      right: null
 
 Template.entry_table_stamp_input.helpers
   formatted_stamp: -> moment(@stamp).format(FORMAT)
