@@ -91,6 +91,7 @@ Template.entry_table_stamp_input.rendered = ->
       down: null
       left: null
       right: null
+      delete: null
 
 Template.entry_table_stamp_input.helpers
   formatted_stamp: -> moment(@stamp).format(FORMAT)
